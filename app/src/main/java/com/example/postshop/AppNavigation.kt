@@ -9,6 +9,7 @@ import com.example.postshop.screen.AuthScreen
 import com.example.postshop.screen.LoginScreen
 import com.example.postshop.screen.SignupScreen
 
+
 @Composable
 fun AppNavigation(modifier: Modifier=Modifier){
     val navController = rememberNavController()

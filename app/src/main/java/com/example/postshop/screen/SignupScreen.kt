@@ -3,7 +3,6 @@ package com.example.postshop.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,9 +29,9 @@ import androidx.compose.ui.unit.sp
 import com.example.postshop.R
 
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier) {
+fun SignupScreen(modifier: Modifier=Modifier){
     var email by remember { mutableStateOf("") }
-    var fullName by remember { mutableStateOf("") }
+    var fullname by remember {mutableStateOf("")}
     var password by remember { mutableStateOf("") }
     Column(
         modifier = modifier
@@ -40,10 +39,11 @@ fun SignupScreen(modifier: Modifier = Modifier) {
             .padding(32.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
+
     ) {
         Text(
-            text = "Hello there",
-            modifier= Modifier.fillMaxWidth(),
+            text = "Signup Screen",
+            modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             style = TextStyle(
                 fontSize = 30.sp,
@@ -51,65 +51,58 @@ fun SignupScreen(modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold
             )
         )
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier= Modifier.height(15.dp))
+
         Text(
             text = "Create an account",
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             style = TextStyle(
-                fontSize = 25.sp
+                fontSize = 20.sp
             )
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier= Modifier.height(15.dp))
+        Image(
+            painter= painterResource(id=R.drawable.register),
+            contentDescription = "Register Image",
+            modifier = Modifier.fillMaxWidth().height(200.dp)
+        )
+        Spacer(modifier= Modifier.height(15.dp))
 
-            Image(
-                painter = painterResource(id = R.drawable.register),
-                contentDescription = "Register image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-
-                )
-
-        Spacer(modifier = Modifier.height(20.dp))
         OutlinedTextField(
-            value= email,
+            value = email,
             onValueChange = {
                 email= it
             },
             label = {
-                Text(text = "Email address")
+                Text("Email addres")
             },
             modifier= Modifier.fillMaxWidth()
-
         )
-        Spacer(modifier = Modifier.height(10.dp))
-
+        Spacer(modifier= Modifier.height(10.dp))
         OutlinedTextField(
-            value = fullName,
-            label = {
-                Text(text = "Full name")
-            },
+            value = fullname,
             onValueChange = {
-                fullName = it
+                fullname=it
+            },
+            label = {
+                Text("Full name")
             },
             modifier = Modifier.fillMaxWidth()
-
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier= Modifier.height(10.dp))
         OutlinedTextField(
-            value = password,
-            label = {
-                Text(text="Password")
-            },
+            value= password,
             onValueChange = {
                 password = it
             },
+            label={
+                Text("Password")
+            },
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = PasswordVisualTransformation()
-
         )
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier= Modifier.height(20.dp))
         Button(
             onClick = {
                 /*TODO*/
@@ -118,9 +111,9 @@ fun SignupScreen(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .height(50.dp)
         ) {
-            Text(text = "Signup", fontSize = 20.sp)
+            Text(text = "Register", fontSize = 20.sp)
         }
 
-
     }
+
 }

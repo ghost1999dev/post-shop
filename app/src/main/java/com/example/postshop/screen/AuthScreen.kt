@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+
 import com.example.postshop.R
 
 @Composable
@@ -52,7 +53,7 @@ fun AuthScreen(modifier: Modifier = Modifier, navController: NavHostController){
         Spacer( modifier= Modifier.height(15.dp))
         Button(
             onClick = {
-                navController.navigate("login")
+               navController.navigate("login")
             },
             modifier= Modifier
                 .fillMaxWidth()
