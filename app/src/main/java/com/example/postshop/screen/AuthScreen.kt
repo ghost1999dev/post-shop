@@ -20,10 +20,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.postshop.R
 
 @Composable
-fun AuthScreen(modifier: Modifier=Modifier){
+fun AuthScreen(modifier: Modifier = Modifier, navController: NavHostController){
     Column (
         modifier= Modifier
             .fillMaxSize()
@@ -50,7 +51,9 @@ fun AuthScreen(modifier: Modifier=Modifier){
 
         Spacer( modifier= Modifier.height(15.dp))
         Button(
-            onClick = {/*TODO*/},
+            onClick = {
+                navController.navigate("login")
+            },
             modifier= Modifier
                 .fillMaxWidth()
                 .height(50.dp)
@@ -59,7 +62,9 @@ fun AuthScreen(modifier: Modifier=Modifier){
         }
         Spacer( modifier= Modifier.height(10.dp))
         OutlinedButton(
-            onClick = {/*TODO*/},
+            onClick = {
+                navController.navigate("signup")
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
