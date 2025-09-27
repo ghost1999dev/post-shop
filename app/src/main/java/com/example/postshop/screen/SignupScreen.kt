@@ -32,12 +32,13 @@ import com.example.postshop.R
 import com.example.postshop.utils.AppUtil
 import com.example.postshop.viewmodel.AuthViewModel
 
+
 @Composable
-fun SignupScreen(modifier: Modifier=Modifier, authViewModel: AuthViewModel = viewModel()){
+fun SignupScreen(modifier: Modifier=Modifier,viewModel:AuthViewModel= viewModel()){
     var email by remember { mutableStateOf("") }
     var fullname by remember {mutableStateOf("")}
     var password by remember { mutableStateOf("") }
-    var context= LocalContext.current
+    var context = LocalContext.current
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -110,11 +111,15 @@ fun SignupScreen(modifier: Modifier=Modifier, authViewModel: AuthViewModel = vie
         Spacer(modifier= Modifier.height(20.dp))
         Button(
             onClick = {
-                authViewModel.signup(email,fullname,password){success,errorMessage->
+                viewModel.signup(
+                    email,
+                    fullname,
+                    password
+                ){success,message->
                     if(success){
-                        AppUtil.showToast(context,"Signup success")
+                        AppUtil.showToast(context,"User registerd successfull")
                     }else{
-                        AppUtil.showToast(context,errorMessage?:"Something went error")
+                        AppUtil.showToast(context,message?:"Something went wrong")
                     }
                 }
             },

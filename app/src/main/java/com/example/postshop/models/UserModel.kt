@@ -1,7 +1,7 @@
-package com.example.postshop.model
+package com.example.postshop.models
 
 data class UserModel (
-    val name:String,
     val email:String,
+    val name:String,
     val uid:String
 )
