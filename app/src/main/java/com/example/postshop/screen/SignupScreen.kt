@@ -18,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -26,13 +27,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.postshop.R
+import com.example.postshop.utils.AppUtil
+import com.example.postshop.viewmodel.AuthViewModel
 
 @Composable
-fun SignupScreen(modifier: Modifier=Modifier){
+fun SignupScreen(modifier: Modifier=Modifier, authViewModel: AuthViewModel = viewModel()){
     var email by remember { mutableStateOf("") }
     var fullname by remember {mutableStateOf("")}
     var password by remember { mutableStateOf("") }
+    var context= LocalContext.current
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -105,7 +110,13 @@ fun SignupScreen(modifier: Modifier=Modifier){
         Spacer(modifier= Modifier.height(20.dp))
         Button(
             onClick = {
-                /*TODO*/
+                authViewModel.signup(email,fullname,password){success,errorMessage->
+                    if(success){
+                        AppUtil.showToast(context,"Signup success")
+                    }else{
+                        AppUtil.showToast(context,errorMessage?:"Something went error")
+                    }
+                }
             },
             modifier= Modifier
                 .fillMaxWidth()
