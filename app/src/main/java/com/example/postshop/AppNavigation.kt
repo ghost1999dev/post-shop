@@ -12,13 +12,11 @@ import com.example.postshop.screen.SignupScreen
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
-
 @Composable
 fun AppNavigation(modifier: Modifier=Modifier){
     val navController = rememberNavController()
-    val isLoggedIn = Firebase.auth.currentUser!=null
-    val firstPage = if(isLoggedIn) "home" else "auth"
-
+    var isLogged = Firebase.auth.currentUser!=null
+    var firstPage = if(isLogged) "home" else "auth"
     NavHost(navController=navController, startDestination = firstPage) {
         composable("auth"){
             AuthScreen(modifier,navController)
@@ -32,6 +30,7 @@ fun AppNavigation(modifier: Modifier=Modifier){
         composable("home"){
             HomeScreen(modifier,navController)
         }
+
 
     }
 }

@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedButton
+
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,26 +25,23 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.example.postshop.R
 import com.example.postshop.utils.AppUtil
 import com.example.postshop.viewmodel.AuthViewModel
 
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier,
-                navController: NavHostController,
-                viewModel: AuthViewModel= viewModel()
-){
+                navController: NavController,
+                viewModel:AuthViewModel= viewModel()
+                ){
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var isLoading by remember { mutableStateOf(false) }
     var context = LocalContext.current
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -93,27 +90,22 @@ fun LoginScreen(modifier: Modifier = Modifier,
         Spacer(modifier = Modifier.height(20.dp))
         Button (
             onClick = {
-                isLoading = true
-                viewModel.login(
-                    email,
-                    password
-                ){success,message->
+                viewModel.login(email,password){success,message->
                     if(success){
-                        isLoading = false
-                        navController.navigate("home")
+                        navController.navigate("home"){
+                            popUpTo("auth"){inclusive=true}
+                        }
                     }else{
-                        isLoading=true
-                        AppUtil.showToast(context,message?:"Something went error")
+                        AppUtil.showToast(context, message?:"Something went error")
                     }
                 }
             },
-            enabled =  !isLoading,
+
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
         ) {
-            Text(text = if(isLoading) "Loggin in" else
-                "Login", fontSize = 20.sp )
+            Text(text = "Login", fontSize = 20.sp )
         }
 
     }

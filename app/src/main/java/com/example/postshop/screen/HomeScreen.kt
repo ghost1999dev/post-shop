@@ -3,7 +3,6 @@ package com.example.postshop.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -12,18 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 @Composable
-fun HomeScreen(
-    modifier: Modifier,
-    navController: NavController
-
-){
+fun HomeScreen(modifier:Modifier=Modifier,
+               navController:NavController){
     Column(
-        modifier = Modifier
+        modifier=Modifier
             .fillMaxSize()
             .padding(32.dp),
         verticalArrangement = Arrangement.Center,
@@ -31,15 +26,14 @@ fun HomeScreen(
     ) {
         Button(
             onClick = {
-               Firebase.auth.signOut()
+                Firebase.auth.signOut()
                 navController.navigate("auth"){
                     popUpTo("home"){inclusive=true}
                 }
+
             }
         ) {
             Text(text = "Logout")
         }
-
     }
-
 }

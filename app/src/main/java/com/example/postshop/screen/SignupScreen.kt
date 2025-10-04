@@ -37,7 +37,7 @@ import com.example.postshop.viewmodel.AuthViewModel
 
 @Composable
 fun SignupScreen(modifier: Modifier=Modifier,
-                 navController:NavController,
+                 navController: NavController,
                  viewModel:AuthViewModel= viewModel()
 ){
     var email by remember { mutableStateOf("") }
@@ -122,11 +122,9 @@ fun SignupScreen(modifier: Modifier=Modifier,
                     password
                 ){success,message->
                     if(success){
-                        AppUtil.showToast(context,"User registerd successfull")
                         navController.navigate("home"){
-                            popUpTo ("auth"){ inclusive=true }
+                            popUpTo("auth"){inclusive=true}
                         }
-
                     }else{
                         AppUtil.showToast(context,message?:"Something went wrong")
                     }
