@@ -28,13 +28,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+
 import com.example.postshop.R
 import com.example.postshop.utils.AppUtil
 import com.example.postshop.viewmodel.AuthViewModel
 
 
 @Composable
-fun SignupScreen(modifier: Modifier=Modifier,viewModel:AuthViewModel= viewModel()){
+fun SignupScreen(modifier: Modifier=Modifier,
+                 navController:NavController,
+                 viewModel:AuthViewModel= viewModel()
+){
     var email by remember { mutableStateOf("") }
     var fullname by remember {mutableStateOf("")}
     var password by remember { mutableStateOf("") }
@@ -118,6 +123,10 @@ fun SignupScreen(modifier: Modifier=Modifier,viewModel:AuthViewModel= viewModel(
                 ){success,message->
                     if(success){
                         AppUtil.showToast(context,"User registerd successfull")
+                        navController.navigate("home"){
+                            popUpTo ("auth"){ inclusive=true }
+                        }
+
                     }else{
                         AppUtil.showToast(context,message?:"Something went wrong")
                     }
