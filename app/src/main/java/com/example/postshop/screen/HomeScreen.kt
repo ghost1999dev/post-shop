@@ -3,6 +3,7 @@ package com.example.postshop.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -35,31 +36,38 @@ import com.google.firebase.auth.auth
 fun HomeScreen(modifier:Modifier=Modifier,
                navController:NavController){
     val navItemList = listOf(
-        NavItem("Home", Icons.Default.ShoppingCart),
-        NavItem("Favorite",Icons.Default.Favorite),
-        NavItem("Cart",Icons.Default.ShoppingCart),
-        NavItem("Profile", Icons.Default.Person)
+        NavItem(label = "Home", icon = Icons.Default.ShoppingCart),
+        NavItem(label = "Favorite", icon = Icons.Default.Favorite),
+        NavItem(label = "Cart", icon=Icons.Default.ShoppingCart),
+        NavItem(label ="Profile", icon = Icons.Default.Person)
     )
     var selectedIndex by remember {
         mutableStateOf(0)
     }
+
     Scaffold(
         bottomBar = {
+
             NavigationBar {
-                navItemList.forEachIndexed{index, navItem->
+                navItemList.forEachIndexed{index,navItem->
                     NavigationBarItem(
+
                         selected = index == selectedIndex,
                         onClick = {
                             selectedIndex = index
                         },
-                        icon={
-                            Icon(navItem.icon, contentDescription = navItem.label)
+                        icon = {
+                            Icon(imageVector = navItem.icon, contentDescription = navItem.label)
                         },
                         label = {
-                            Text(text = navItem.label)
+                            Text(text=navItem.label)
                         }
+
                     )
                 }
+
+
+
             }
         }
     ) {
@@ -68,18 +76,19 @@ fun HomeScreen(modifier:Modifier=Modifier,
 
 }
 
+//Rendering content
 @Composable
-fun ContentScreen(modifier: Modifier = Modifier,selectedItem:Int){
-    when(selectedItem){
+fun ContentScreen(modifier: Modifier=Modifier, selectedIndex:Int){
+    when(selectedIndex){
         0-> HomePage()
         1-> FavoritePage()
         2-> CartPage()
         3-> ProfilePage()
     }
-
 }
 
 data class NavItem(
-    val label: String,
+    val label:String,
     val icon:ImageVector
 )
+

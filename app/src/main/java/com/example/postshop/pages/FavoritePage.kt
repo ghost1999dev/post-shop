@@ -5,5 +5,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun FavoritePage(){
-    Text(text = "FavoritePage")
+    Text(text = "Favorite page")
 }
