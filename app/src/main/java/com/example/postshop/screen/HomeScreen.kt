@@ -71,19 +71,19 @@ fun HomeScreen(modifier:Modifier=Modifier,
             }
         }
     ) {
-        ContentScreen(modifier=modifier.padding(it),selectedIndex)
+        ContentScreen(modifier=modifier.padding(it),selectedIndex,navController)
     }
 
 }
 
 //Rendering content
 @Composable
-fun ContentScreen(modifier: Modifier=Modifier, selectedIndex:Int){
+fun ContentScreen(modifier: Modifier=Modifier,selectedIndex:Int,navController: NavController){
     when(selectedIndex){
-        0-> HomePage()
+        0-> HomePage(modifier, navController)
         1-> FavoritePage()
         2-> CartPage()
-        3-> ProfilePage()
+        3->  ProfilePage()
     }
 }
 
@@ -91,4 +91,5 @@ data class NavItem(
     val label:String,
     val icon:ImageVector
 )
+
 
