@@ -8,20 +8,21 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
+
 @Composable
 fun BannerView(
-    modifier: Modifier=Modifier
+    modifier:Modifier=Modifier
 ){
     var bannerList by remember {
         mutableStateOf<List<String>>(emptyList())
@@ -30,14 +31,12 @@ fun BannerView(
     LaunchedEffect(Unit) {
         Firebase.firestore.collection("data")
             .document("banners")
-            .get().addOnCompleteListener(){
+            .get().addOnCompleteListener{
                 bannerList = it.result.get("urls") as List<String>
             }
     }
 
-    Column(
-        modifier = modifier
-    ) {
+    Column {
         val pageState = rememberPagerState (0){
             bannerList.size
         }
@@ -46,14 +45,11 @@ fun BannerView(
         ) {
             AsyncImage(
                 model = bannerList.get(it),
-                contentDescription = "Banner image",
-                modifier = Modifier.fillMaxWidth()
+                contentDescription = "Banner Image",
+                modifier =Modifier.fillMaxWidth()
                     .clip(RoundedCornerShape(16.dp))
 
             )
         }
-
     }
 }
-
-

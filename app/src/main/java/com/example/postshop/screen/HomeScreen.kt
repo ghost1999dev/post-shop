@@ -78,9 +78,11 @@ fun HomeScreen(modifier:Modifier=Modifier,
 
 //Rendering content
 @Composable
-fun ContentScreen(modifier: Modifier=Modifier,selectedIndex:Int,navController: NavController){
+fun ContentScreen(modifier: Modifier=Modifier,selectedIndex:Int,
+                  navController: NavController
+){
     when(selectedIndex){
-        0-> HomePage(modifier, navController)
+        0-> HomePage(modifier)
         1-> FavoritePage()
         2-> CartPage()
         3->  ProfilePage()
