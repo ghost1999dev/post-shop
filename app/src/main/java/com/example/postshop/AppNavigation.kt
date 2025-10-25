@@ -33,16 +33,16 @@ fun AppNavigation(modifier: Modifier=Modifier){
         composable("home"){
             HomeScreen(modifier,navController)
         }
-
-        composable("category-products/{categoryId}") {
+        composable("category-products/{categoryId}"){
             val categoryId = it.arguments?.getString("categoryId")
-            CategoryProductsPage(modifier,categoryId);
+            CategoryProductsPage(modifier, categoryId)
         }
+
 
 
     }
 }
-
-object GlobalNavigation {
-    lateinit var  navController: NavHostController
+object GlobalNavigation{
+    lateinit var navController:NavHostController
 }
+

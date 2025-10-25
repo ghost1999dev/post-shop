@@ -11,11 +11,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 import com.example.postshop.components.BannerView
 import com.example.postshop.components.CategoriesView
 import com.example.postshop.components.HeaderView
-import com.example.postshop.models.CategoryModel
+
 
 
 @Composable
@@ -31,7 +30,6 @@ fun HomePage(modifier: Modifier=Modifier,
         Spacer(modifier = Modifier.height(20.dp))
         //Second component
         BannerView(modifier)
-
         Spacer(modifier = Modifier.height(15.dp))
         Text(
             "Categories",
@@ -40,7 +38,8 @@ fun HomePage(modifier: Modifier=Modifier,
                 fontSize = 20.sp
             )
         )
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+        //Third component
         CategoriesView(modifier)
 
     }

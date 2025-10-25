@@ -6,7 +6,5 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun CategoryProductsPage(modifier: Modifier=Modifier,categoryId:String?){
-
-    Text("This is category ${categoryId}")
-
+    Text("Category product page ${categoryId}")
 }
