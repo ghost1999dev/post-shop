@@ -31,8 +31,15 @@ fun BannerView(
     LaunchedEffect(Unit) {
         Firebase.firestore.collection("data")
             .document("banners")
-            .get().addOnCompleteListener{
-                bannerList = it.result.get("urls") as List<String>
+            .get().addOnCompleteListener{ task ->
+                if(task.isSuccessful){
+                    val urls = task.result?.get("urls") as? List<String>
+                    bannerList = urls ?: emptyList()
+                }else {
+                    val exception = task.exception
+                    println("Error found: ${exception?.message}")
+                }
+
             }
     }
 
