@@ -1,4 +1,6 @@
 package com.example.postshop.pages
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.postshop.components.ProductItemView
 import com.example.postshop.models.ProductModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -37,11 +40,18 @@ fun CategoryProductsPage(modifier: Modifier=Modifier,categoryId:String?){
     }
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
             .padding(17.dp)
     ) {
-        items(productList.value){item->
-            Text(text = item.title)
+        items(productList.value.chunked(2)){rowItems->
+            Row {
+                rowItems.forEach{
+                    ProductItemView(product=it, modifier = Modifier.weight(1f))
+                }
+                if (rowItems.size == 1){
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+            }
         }
     }
 }
