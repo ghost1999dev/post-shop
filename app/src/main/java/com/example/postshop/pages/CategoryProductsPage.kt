@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.postshop.components.ProductItemView
+
 import com.example.postshop.models.ProductModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -46,9 +47,9 @@ fun CategoryProductsPage(modifier: Modifier=Modifier,categoryId:String?){
         items(productList.value.chunked(2)){rowItems->
             Row {
                 rowItems.forEach{
-                    ProductItemView(product=it, modifier = Modifier.weight(1f))
+                    ProductItemView(product = it, modifier = Modifier.weight(1f))
                 }
-                if (rowItems.size == 1){
+                if(rowItems.size ==1){
                     Spacer(modifier = Modifier.weight(1f))
                 }
             }

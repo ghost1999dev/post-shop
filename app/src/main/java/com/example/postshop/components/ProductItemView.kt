@@ -29,17 +29,15 @@ import coil.compose.AsyncImage
 import com.example.postshop.models.ProductModel
 
 @Composable
-fun ProductItemView(modifier: Modifier = Modifier, product: ProductModel){
-    Card (
-        modifier= modifier
+fun ProductItemView(modifier: Modifier= Modifier, product:ProductModel){
+    Card(
+        modifier = modifier
             .padding(10.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(8.dp)
-    ){
-        Column(
-            modifier = Modifier.padding(12.dp)
-        ) {
+    ) {
+        Column {
             AsyncImage(
                 model = product.images.firstOrNull(),
                 contentDescription = product.title,
@@ -53,32 +51,35 @@ fun ProductItemView(modifier: Modifier = Modifier, product: ProductModel){
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(8.dp)
-
             )
-
-            Row(
-                modifier= Modifier
+            Row (
+                modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
-                verticalAlignment =  Alignment.CenterVertically
-            ) {
+                verticalAlignment = Alignment.CenterVertically
+            ){
                 Text(
                     text = "$"+ product.price,
                     fontSize = 14.sp,
                     style = TextStyle(textDecoration = TextDecoration.LineThrough)
-                    )
+                )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "$"+ product.actualPrice,
-                    fontSize = 16.sp
-                    )
-                Spacer(modifier = Modifier.weight(1f))
+
+                Text(
+                    text = "$" + product.actualPrice,
+                    fontSize = 16.sp,
+
+                )
+                Spacer(modifier= Modifier.weight(1f))
                 IconButton(onClick = {}) {
-                    Icon(
-                        imageVector = Icons.Default.ShoppingCart,
-                        contentDescription = "Add to cart"
-                    )
+                   Icon(
+                       imageVector = Icons.Default.ShoppingCart,
+                       contentDescription = "Add to cart")
+
                 }
+
             }
         }
     }
+
 }
