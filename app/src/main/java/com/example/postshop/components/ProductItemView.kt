@@ -1,5 +1,8 @@
 package com.example.postshop.components
 
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,13 +29,21 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.postshop.GlobalNavigation
 import com.example.postshop.models.ProductModel
 
 @Composable
 fun ProductItemView(modifier: Modifier= Modifier, product:ProductModel){
     Card(
         modifier = modifier
-            .padding(10.dp),
+            .padding(10.dp)
+            .clickable (
+              indication = LocalIndication.current, interactionSource = MutableInteractionSource(),
+                onClick = {
+                   GlobalNavigation.navController.navigate("product-details/"+product.id)
+                }
+
+            ),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(8.dp)

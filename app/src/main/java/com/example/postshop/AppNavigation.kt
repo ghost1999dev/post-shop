@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.postshop.pages.CategoryProductsPage
+import com.example.postshop.pages.ProductDetailsPage
 import com.example.postshop.screen.AuthScreen
 import com.example.postshop.screen.HomeScreen
 import com.example.postshop.screen.LoginScreen
@@ -36,6 +37,10 @@ fun AppNavigation(modifier: Modifier=Modifier){
         composable("category-products/{categoryId}"){
             val categoryId = it.arguments?.getString("categoryId")
             CategoryProductsPage(modifier, categoryId)
+        }
+        composable("product-details/{productId}"){
+            var productId = it.arguments?.getString("productId")
+            ProductDetailsPage(modifier,productId?:"")
         }
 
 
