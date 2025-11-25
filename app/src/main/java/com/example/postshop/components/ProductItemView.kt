@@ -38,11 +38,11 @@ fun ProductItemView(modifier: Modifier= Modifier, product:ProductModel){
         modifier = modifier
             .padding(10.dp)
             .clickable (
-              indication = LocalIndication.current, interactionSource = MutableInteractionSource(),
+                indication = LocalIndication.current,
+                interactionSource = MutableInteractionSource(),
                 onClick = {
-                   GlobalNavigation.navController.navigate("product-details/"+product.id)
+                    GlobalNavigation.navController.navigate("product-details/"+product.id)
                 }
-
             ),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),

@@ -23,12 +23,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -43,13 +44,14 @@ import com.tbuonomo.viewpagerdotsindicator.compose.model.DotGraphic
 import com.tbuonomo.viewpagerdotsindicator.compose.type.ShiftIndicatorType
 
 @Composable
-fun ProductDetailsPage(modifier: Modifier = Modifier, productId:String){
+fun ProductDetailsPage(modifier:Modifier = Modifier, productId:String){
     var product by remember {
         mutableStateOf(ProductModel())
     }
 
     LaunchedEffect(key1 = Unit) {
-        Firebase.firestore.collection("data").document("stock")
+        Firebase.firestore.collection("data")
+            .document("stock")
             .collection("products")
             .document(productId).get()
             .addOnCompleteListener {
@@ -60,6 +62,7 @@ fun ProductDetailsPage(modifier: Modifier = Modifier, productId:String){
                     }
                 }
             }
+
     }
 
     Column(
@@ -74,12 +77,15 @@ fun ProductDetailsPage(modifier: Modifier = Modifier, productId:String){
             fontSize = 20.sp,
             modifier = Modifier.padding(8.dp)
         )
-
         Spacer(modifier = Modifier.height(8.dp))
+
+        //Images carrousel
+
         Column {
-            val pagerState = rememberPagerState (0){
+            val pagerState = rememberPagerState {
                 product.images.size
             }
+
             HorizontalPager(
                 state = pagerState,
                 pageSpacing = 24.dp
@@ -94,7 +100,6 @@ fun ProductDetailsPage(modifier: Modifier = Modifier, productId:String){
                 )
             }
             Spacer(modifier = Modifier.height(10.dp))
-
             DotsIndicator(
                 dotCount = product.images.size,
                 type = ShiftIndicatorType(
@@ -102,58 +107,59 @@ fun ProductDetailsPage(modifier: Modifier = Modifier, productId:String){
                         color = MaterialTheme.colorScheme.primary,
                         size = 6.dp
                     )
+
                 ),
                 pagerState = pagerState
             )
-
         }
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-           Text(
-               text = "$"+ product.price,
-               fontSize = 16.sp,
-               style = TextStyle(textDecoration = TextDecoration.LineThrough)
-           )
-
-            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = "$"+ product.price,
+                fontSize = 16.sp,
+                style = TextStyle(textDecoration = TextDecoration.LineThrough)
+            )
+            Spacer(modifier= Modifier.width(8.dp))
             Text(
                 text = "$"+ product.actualPrice,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.Bold
             )
-
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier= Modifier.weight(1f))
             IconButton(onClick = {}) {
                 Icon(
                     imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "Add to favorite"
+                    contentDescription = "Add to Favorite"
                 )
             }
 
-        }
 
+        }
         Button(
             onClick = {},
-            modifier = Modifier.fillMaxWidth().height(50.dp)
+            modifier = Modifier.fillMaxWidth()
+                .height(50.dp)
         ) {
-            Text(text = "Add to Cart", fontSize =16.sp )
-
+            Text(text = "Add to cart", fontSize = 16.sp)
         }
-
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Product description :",
+            text = "Product Description",
             fontWeight = FontWeight.Bold,
-            fontSize = 18.sp
+            fontSize = 17.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = product.description, fontSize = 16.sp)
+        Text(
+            text = product.description,
+            fontSize = 16.sp
+        )
 
 
     }
+
+
 }
