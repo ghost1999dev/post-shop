@@ -20,7 +20,7 @@ fun AppNavigation(modifier: Modifier=Modifier){
     val navController = rememberNavController()
     GlobalNavigation.navController = navController
     var isLogged = Firebase.auth.currentUser!=null
-    var firstPage = if(isLogged) "home" else "auth"
+    var firstPage = if(isLogged) "home" else "login"
     NavHost(navController=navController, startDestination = firstPage) {
         composable("auth"){
             AuthScreen(modifier,navController)
