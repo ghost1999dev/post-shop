@@ -51,7 +51,7 @@ fun ProductDetailsPage(modifier:Modifier = Modifier, productId:String){
         mutableStateOf(ProductModel())
     }
 
-    var context = LocalContext.current
+   var context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
         Firebase.firestore.collection("data")

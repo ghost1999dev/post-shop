@@ -85,7 +85,9 @@ fun ProductItemView(modifier: Modifier= Modifier, product:ProductModel){
 
                 )
                 Spacer(modifier= Modifier.weight(1f))
-                IconButton(onClick = {AppUtil.addToCart(context,product.id)}) {
+                IconButton(onClick = {
+                    AppUtil.addToCart(context,product.id)
+                }) {
                    Icon(
                        imageVector = Icons.Default.ShoppingCart,
                        contentDescription = "Add to cart")
